@@ -1,44 +1,59 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Main {
 
     public static void main(String[] args) {
 
-        Person person = addPerson();
-        System.out.println(person.toString());
+        Person person = new Person();
+        Scanner scanner = new Scanner(System.in);
+        String firstName;
+        String lastName;
+        int age;
+        boolean error = true;
 
+        System.out.println("Podaj imię: ");
+        do {
+            try {
+                firstName = scanner.nextLine();
+                person.setFirstName(firstName);
+                error = false;
+                System.out.println("Dzięki!");
+            } catch (NameUndefinedException e) {
+                System.err.println(e.getMessage());
+            }
+        } while (error);
+        error = true;
+        System.out.println("Podaj nazwisko: ");
+        do {
+            try {
+                lastName = scanner.nextLine();
+                person.setLastName(lastName);
+                error = false;
+                System.out.println("Dzięki!");
+            } catch (NameUndefinedException e) {
+                System.err.println(e.getMessage());
+            }
+        } while (error);
+        error = true;
+        System.out.println("Podaj wiek: ");
+        do {
+            try {
+                age = scanner.nextInt();
+                person.setAge(age);
+                scanner.nextLine();
+                error = false;
+                System.out.println("Dzięki!");
+            } catch (IncorrectAgeException /*| InputMismatchException*/ e) {
+                System.err.println(e.getMessage());
+            }
+        } while (error);
+
+        System.out.println("Podaj pesel:");
+        String pesel = scanner.nextLine();
+        person.setPesel(pesel); //zakładam, że pole pesel może być puste
+        System.out.println("Dzięki\n");
+
+        System.out.println(person.toString());
     }
 
-    static Person addPerson() {
-        Scanner scanner = new Scanner(System.in);
-        String firstName = null;
-        String lastName = null;
-        int age = 0;
-        try {
-            System.out.print("Podaj imię: ");
-            firstName = scanner.nextLine();
-//            System.out.print("Podaj nazwisko: ");
-//            lastName = scanner.nextLine();
-        } catch (NameUndefinedException e1) {
-            System.out.println(e1.getMessage());
-        }
-        try {
-            System.out.print("Podaj nazwisko: ");
-            lastName = scanner.nextLine();
-        } catch (NameUndefinedException e3) {
-            System.out.println(e3.getMessage());
-        }
-        try {
-            System.out.print("Podaj wiek: ");
-            age = scanner.nextInt();
-            scanner.nextLine();
-        } catch (IncorrectAgeException | InputMismatchException e2) {
-            System.out.println(e2.getMessage());
-        }
-            System.out.print("Podaj pesel: ");
-            String pesel = scanner.nextLine();
-
-            return new Person(firstName, lastName, age, pesel);
-        }
 }
