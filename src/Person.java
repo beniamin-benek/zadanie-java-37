@@ -7,7 +7,9 @@ class Person {
 
     public Person(String firstName, String lastName, int age, String pesel) {
 
-        if (firstName == null || lastName == null || firstName.length() < 2 || lastName.length() < 2)
+        if (firstName == null || lastName == null)
+            throw new NullPointerException();
+        if (firstName.length() < 2 || lastName.length() < 2)
             throw new NameUndefinedException("Wprowadzona wartość jest niepoprawne.");
         if (age < 1)
             throw new IncorrectAgeException("Wprowadzona wartość jest nipoprawna.");
