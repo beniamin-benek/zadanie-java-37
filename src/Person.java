@@ -43,7 +43,7 @@ class Person {
     }
 
     public void setAge(int age) throws IncorrectAgeException {
-        if (age < 0) throw new IncorrectAgeException("Podana wartość jest zbyt niska. Spróbuj ponownie.");
+        if (age < 1) throw new IncorrectAgeException("Podana wartość jest zbyt niska. Spróbuj ponownie.");
         this.age = age;
     }
 
